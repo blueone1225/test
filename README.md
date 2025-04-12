@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <title>古堡</title>
+  <title>惡靈古堡99.0</title>
   <style>
     body {
       font-family: "微軟正黑體", sans-serif;
@@ -167,7 +167,7 @@
 
 <div class="section">
   <h3>喪屍 吼叫</h3>
-  <div id="npcDialog">喪屍回應你：「WUlaaaaaaaa」</div>
+  <div id="npcDialog">喪屍回應你：「hey hey stranger 」</div>
   <input type="text" id="visitorInput" placeholder="跟喪屍說點什麼...">
   <button onclick="respondToVisitor()">發送</button>
 </div>
