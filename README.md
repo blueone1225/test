@@ -1,8 +1,8 @@
-
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <title>惡靈古堡99.0</title>
+  <title>古堡</title>
   <style>
     body {
       font-family: "微軟正黑體", sans-serif;
@@ -13,28 +13,28 @@
       position: relative;
     }
     h1, h2, h3 {
-      color: #ff0000;
+      color: #b71c1c;
     }
     .section {
-      margin-bottom: 20px;
-      border: 2px solid #ffcc80;
+      margin: 40px 0 20px;
+      border: 2px solid #880e4f;
       padding: 15px;
       border-radius: 10px;
-      background: #1a1a1a;
+      background: #0d1b2a;
       position: relative;
       z-index: 5;
     }
     button {
-      background-color: #1f2f47;
+      background-color: #1a237e;
       color: #ffffff;
-      border: 2px solid #ff0000;
+      border: 2px solid #c62828;
       padding: 10px;
       margin: 5px;
       border-radius: 8px;
       cursor: pointer;
     }
     button:hover {
-      background-color: #b71c1c;
+      background-color: #ff1744;
     }
     input {
       padding: 5px;
@@ -77,15 +77,8 @@
       0% {transform: translateY(0px) rotate(0deg);}
       100% {transform: translateY(100vh) rotate(360deg);}
     }
-    .lightning {
-      background: white;
-      opacity: 0.9;
-      animation: flash 0.2s;
-    }
-    @keyframes flash {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 1; }
-    }
+    .lightning { background: white; opacity: 0.9; animation: flash 0.2s; }
+    @keyframes flash { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
     .flame {
       background: radial-gradient(circle, rgba(255,100,0,0.6) 0%, rgba(255,0,0,0.3) 70%);
       animation: burn 0.5s ease-out;
@@ -126,9 +119,7 @@
       0% { transform: scale(1); opacity: 1; }
       100% { transform: scale(3); opacity: 0; }
     }
-    .shake {
-      animation: shake 0.3s;
-    }
+    .shake { animation: shake 0.3s; }
     @keyframes shake {
       0% { transform: translate(0, 0); }
       25% { transform: translate(-10px, 5px); }
@@ -149,29 +140,50 @@
       top: 80px;
       left: 50%;
       transform: translateX(-50%);
-      background-color: #ff0000;
-      color: #ffffff;
+      background-color: #b71c1c;
+      color: #fff;
       padding: 20px 30px;
       border-radius: 20px;
-      box-shadow: 0 0 20px orange;
+      box-shadow: 0 0 30px #ff1744;
       z-index: 99;
       animation: pulse 2s infinite;
-      font-size: 36px;
-      font-weight: 900;
-      text-align: center;
-      font-family: "Microsoft JhengHei", "微軟正黑體", sans-serif;
+      font-weight: bold;
+      font-size: 22px;
+    }
+    #videoBox {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 400px;
+      height: 250px;
+      z-index: 100;
+      border: 3px solid #ff1744;
+      box-shadow: 0 0 15px red;
     }
   </style>
 </head>
 <body>
 
+<!-- YouTube 影片框 -->
+<div id="videoBox">
+  
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aBmIi_XdnSg" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+
+
+
+
+
+</div>
+
+<!-- 喪屍對話區 -->
 <div class="section">
   <h3>喪屍 吼叫</h3>
-  <div id="npcDialog">喪屍回應你：「hey hey stranger 」</div>
+  <div id="npcDialog">喪屍回應你：「WUlaaaaaaaa」</div>
   <input type="text" id="visitorInput" placeholder="跟喪屍說點什麼...">
   <button onclick="respondToVisitor()">發送</button>
 </div>
 
+<!-- 戰鬥區 -->
 <div class="section">
   <h3>⚔️ 來一下</h3>
   <p>喪屍血量：<span id="enemyHP">100</span> | 玩家血量：<span id="playerHP">100</span></p>
@@ -181,6 +193,7 @@
   <p id="battleLog"></p>
 </div>
 
+<!-- 特效容器 -->
 <div id="effectContainer" class="effect"></div>
 
 <script>
@@ -263,7 +276,7 @@ function triggerEffect(type) {
 function showVictory() {
   const victoryBox = document.createElement("div");
   victoryBox.className = "victory-box";
-  victoryBox.textContent = "勝利！喪屍不動了！";
+  victoryBox.innerHTML = "<h2><strong>勝利！喪屍不動了！</strong></h2>";
   document.body.appendChild(victoryBox);
   triggerEffect("explode");
 }
