@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <title> 鑫羿文創 </title>
+  <title> -鑫羿文創- </title>
   <style>
     body {
       font-family: "微軟正黑體", sans-serif;
@@ -120,7 +120,7 @@ function respondToVisitor() {
   document.getElementById("visitorInput").value = "";
 }
 
-const enemyNames = ["紅蓮哥吉拉", "摩斯拉", "王者基多拉", "正宗哥吉拉", "小吉拉", "蓋亞", "固吉拉"];
+const enemyNames = ["紅蓮哥吉拉", "摩斯拉", "王者基多拉", "正宗哥吉拉", "蓋亞"];
 let blockCount = 1;
 
 function addNewBattleBlock() {
