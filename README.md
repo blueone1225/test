@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <title>古堡</title>
+  <title> 鑫羿文創 </title>
   <style>
     body {
       font-family: "微軟正黑體", sans-serif;
@@ -72,32 +72,37 @@
 
 <!-- 最上方影片 -->
 <div class="youtube-container">
-  <iframe src="https://www.youtube.com/embed/aBmIi_XdnSg" title="YouTube video" frameborder="0"
+  
+<iframe src="https://www.youtube.com/embed/_TWOsvVAXkA" title="YouTube video" frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen></iframe>
+
+
+
+
 </div>
 
 <div class="content">
 
-  <!-- 喪屍對話 -->
+  <!-- 哥吉拉系列 全新進化 -->
   <div class="section">
-    <h3>喪屍 吼叫</h3>
-    <div id="npcDialog">喪屍回應你：「WUlaaaaaaaa」</div>
-    <input type="text" id="visitorInput" placeholder="跟喪屍說點什麼...">
+    <h3> □三式機龍□ 機械哥吉拉</h3>
+    <div id="npcDialog">機械拉回應你：「 啊啊啊啊嗚 」</div>
+    <input type="text" id="visitorInput" placeholder="跟機械拉說點什麼...">
     <button onclick="respondToVisitor()">發送</button>
   </div>
 
   <!-- 主戰鬥區塊 + 增加按鈕 -->
   <div id="battleArea">
     <div class="section battle-container" id="battle0">
-      <h3>⚔️ 來一下</h3>
-      <p><span class="enemyName">喪屍</span> 血量：<span class="enemyHP">100</span> | 玩家血量：<span class="playerHP">100</span></p>
+      <h3>⚔️ 挑戰開始 </h3>
+      <p><span class="enemyName">機械拉</span> 血量：<span class="enemyHP">100</span> | 玩家血量：<span class="playerHP">100</span></p>
       <button onclick="battle(this, 'attack')">攻擊</button>
       <button onclick="battle(this, 'defend')">防禦</button>
       <button onclick="battle(this, 'skill')">技能</button>
       <button onclick="deleteBlock(this)">刪除</button>
       <p class="battleLog"></p>
-      <div class="victory-box">勝利！<span class="enemyName">喪屍</span> 不動了！</div>
+      <div class="victory-box">勝利！<span class="enemyName">機械拉</span> 能源不足；損毀不能移動！</div>
     </div>
   </div>
 
@@ -109,13 +114,13 @@
 function respondToVisitor() {
   const input = document.getElementById("visitorInput").value.trim();
   if (input.length === 0) return;
-  const replies = ["啦。", "哈～", "蛤", "eeeee.", "laaaaaaaa。"];
+  const replies = ["啊", "轟", "yeeee", "（激光射線）", "......."];
   const randomReply = replies[Math.floor(Math.random() * replies.length)];
-  document.getElementById("npcDialog").innerText = `喪屍回應你：「${randomReply}」`;
+  document.getElementById("npcDialog").innerText = `機械拉回應你：「${randomReply}」`;
   document.getElementById("visitorInput").value = "";
 }
 
-const enemyNames = ["惡魔", "魔鬼", "古物", "怪物", "地獄犬", "喪屍", "夜行者"];
+const enemyNames = ["紅蓮哥吉拉", "摩斯拉", "王者基多拉", "正宗哥吉拉", "小吉拉", "蓋亞", "固吉拉"];
 let blockCount = 1;
 
 function addNewBattleBlock() {
@@ -131,7 +136,7 @@ function addNewBattleBlock() {
     <button onclick="battle(this, 'skill')">技能</button>
     <button onclick="deleteBlock(this)">刪除</button>
     <p class="battleLog"></p>
-    <div class="victory-box">勝利！<span class="enemyName">${newEnemy}</span> 不動了！</div>
+    <div class="victory-box">勝利！<span class="enemyName">${newEnemy}</span> 破壞毀損不能移動；能源不足 </div>
   `;
   container.appendChild(block);
   blockCount++;
