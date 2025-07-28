@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>幻肢痛腦區信號傳遞</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .description {
+      margin-top: 30px;
+      line-height: 1.6;
+    }
+    .brain-regions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .region-card {
+      flex: 1;
+      min-width: 250px;
+      padding: 15px;
+      background-color: #e8ecef;
+      border-radius: 5px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    }
+    .region-card h3 {
+      margin: 0 0 10px;
+      color: #34495e;
+    }
+    #plotly-graph {
+      width: 100%;
+      height: 500px;
+      margin-bottom: 20px;
+    }
+    .input-section {
+      margin-bottom: 30px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 5px;
+    }
+    .input-section label {
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    .input-section input {
+      padding: 5px;
+      margin-right: 10px;
+      width: 100px;
+    }
+    .input-section button {
+      padding: 8px 15px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .input-section button:hover {
+      background-color: #2980b9;
+    }
+    @media (max-width: 600px) {
+      .region-card {
+        min-width: 100%;
+      }
+      .input-section input {
+        width: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>幻肢痛中的腦區信號傳遞</h1>
+
+  <!-- 圖表與互動功能區 -->
+  <div id="plotly-graph"></div>
+
+  <div class="input-section">
+    <label for="thalamus-input">丘腦初始信號強度 (0-10):</label>
+    <input type="number" id="thalamus-input" value="8" min="0" max="10" step="0.1">
+    <button onclick="updateGraph()">更新圖表</button>
+  </div>
+
+  <!-- 說明與腦區內容下方呈現 -->
+  <div class="description">
+    <p>此圖表模擬幻肢痛中腦區的信號傳遞，展示丘腦、頂葉皮質、扣帶回皮質和前額葉皮質的信號動態。調整上方丘腦初始信號強度，觀察圖表變化，了解各腦區如何影響疼痛體驗。</p>
+  </div>
+
+  <div class="brain-regions">
+    <div class="region-card">
+      <h3>丘腦（通訊中繼站）</h3>
+      <p>傳遞來自外周神經的疼痛信號，作為感覺信號的入口。</p>
+    </div>
+    <div class="region-card">
+      <h3>頂葉皮質（地圖參謀團）</h3>
+      <p>整合感覺，形成身體空間認知，可能誤判幻肢位置。</p>
+    </div>
+    <div class="region-card">
+      <h3>扣帶回皮質（情報分析團）</h3>
+      <p>放大疼痛的情緒影響，使其更顯著。</p>
+    </div>
+    <div class="region-card">
+      <h3>前額葉皮質（指揮部）</h3>
+      <p>負責理性認知，知道肢體不存在，但無法阻止疼痛。</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  let time = [1, 2, 3, 4, 5];
+
+  function generateSignals(initial) {
+    let thalamus = [initial];
+    for (let i = 1; i < time.length; i++) {
+      thalamus.push(thalamus[i - 1] * 0.85);
+    }
+
+    let parietal = thalamus.map(x => x * 0.9);
+    let cingulate = parietal.map(x => x * 1.2);
+    let prefrontal = cingulate.map(x => Math.max(0, 2 - 0.1 * x));
+
+    return { thalamus, parietal, cingulate, prefrontal };
+  }
+
+  function drawGraph(signals) {
+    const data = [
+      {
+        x: time,
+        y: signals.thalamus,
+        mode: 'lines+markers',
+        name: '丘腦 (通訊中繼站)',
+        line: { color: '#1f77b4' },
+        marker: { symbol: 'circle' },
+        hovertemplate: '時間: %{x}<br>信號: %{y:.2f}<extra>丘腦</extra>'
+      },
+      {
+        x: time,
+        y: signals.parietal,
+        mode: 'lines+markers',
+        name: '頂葉皮質 (地圖參謀團)',
+        line: { color: '#ff7f0e' },
+        marker: { symbol: 'square' },
+        hovertemplate: '時間: %{x}<br>信號: %{y:.2f}<extra>頂葉皮質</extra>'
+      },
+      {
+        x: time,
+        y: signals.cingulate,
+        mode: 'lines+markers',
+        name: '扣帶回皮質 (情報分析團)',
+        line: { color: '#2ca02c' },
+        marker: { symbol: 'triangle-up' },
+        hovertemplate: '時間: %{x}<br>信號: %{y:.2f}<extra>扣帶回皮質</extra>'
+      },
+      {
+        x: time,
+        y: signals.prefrontal,
+        mode: 'lines+markers',
+        name: '前額葉皮質 (指揮部)',
+        line: { color: '#d62728' },
+        marker: { symbol: 'diamond' },
+        hovertemplate: '時間: %{x}<br>信號: %{y:.2f}<extra>前額葉皮質</extra>'
+      }
+    ];
+
+    const layout = {
+      title: { text: '幻肢痛中的腦區信號傳遞', x: 0.5 },
+      xaxis: { title: '時間 (天)', gridcolor: '#e0e0e0' },
+      yaxis: { title: '信號強度', range: [0, 12], gridcolor: '#e0e0e0' },
+      showlegend: true,
+      paper_bgcolor: '#ffffff',
+      plot_bgcolor: '#ffffff'
+    };
+
+    Plotly.newPlot('plotly-graph', data, layout, {responsive: true});
+  }
+
+  function updateGraph() {
+    const input = parseFloat(document.getElementById('thalamus-input').value);
+    if (isNaN(input) || input < 0 || input > 10) {
+      alert('請輸入0到10之間的數字！');
+      return;
+    }
+
+    const signals = generateSignals(input);
+    drawGraph(signals);
+  }
+
+  // 初始化載入圖表
+  updateGraph();
+</script>
+</body>
+</html>
