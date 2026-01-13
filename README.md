@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-   <div id="status-bar" class="turn-yellow"> 烏薩-棋 </div>
+   
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
@@ -41,7 +41,7 @@
     </style>
 </head>
 <body>
-
+       <div id="status-bar" class="turn-yellow"> 烏薩-棋 </div> 
     <div id="status-bar" class="turn-red">紅方下子</div>
     <div id="board"></div>
     <div class="controls">
