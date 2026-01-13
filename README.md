@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-烏殺棋
+   <div id="status-bar" class="turn-yellow"> 烏薩-棋 </div>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
