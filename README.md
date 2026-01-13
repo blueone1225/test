@@ -41,8 +41,12 @@
     </style>
 </head>
 <body>
-       <div id="status-bar" class="turn-yellow"> 烏薩-棋 </div> 
+        
+    <div class="status-container">
+    <div class="game-title">烏薩-棋</div>
     <div id="status-bar" class="turn-red">紅方下子</div>
+</div>
+   
     <div id="board"></div>
     <div class="controls">
         <button onclick="resetGame()">重新開局</button>
