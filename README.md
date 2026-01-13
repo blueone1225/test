@@ -14,6 +14,15 @@
         .turn-red { background: var(--red); color: white; border: 3px solid #b71c1c; }
         .turn-black { background: var(--black); color: white; border: 3px solid #000; }
 
+/* 上方黃色標題 */
+.game-title {
+    background-color: #f5d742;
+    color: #000;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 8px 0;
+}
+
         /* 響應式棋盤 */
         #board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2vw; background: var(--board); padding: 15px; border-radius: 15px; width: 90vw; max-width: 340px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         
